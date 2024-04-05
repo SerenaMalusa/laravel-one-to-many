@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 class ProjectSeeder extends Seeder
 {
@@ -13,17 +16,25 @@ class ProjectSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        $project = new Project();
-        $project->title = 'Boolando';
-        $project->description = "Create un nuovo progetto utilizzando Vite e Vue 3 e definite i componenti necessari per strutturare il layout.
-                                    Non esagerate con i componenti: less is more.
-                                    L'esercizio già lo conoscete (html-css-boolando), ma la sfida è suddividerlo in componenti e provare a sfruttare SASS per rendere il nostro stile più leggibile e flessibile (di quali variabili potreste avere bisogno?).";
-        $project->repository = 'vite-boolando';
-        $project->github_link = 'https://github.com/SerenaMalusa/vite-boolando';
-        $project->creation_date = '2024-03-27';
-        $project->last_commit = '2024-03-29';
-        $project->save();
+        $types = Type::all()->pluck('id');
+        // $types[] = null;
+
+        for ($i = 0; $i < 50; $i++) {
+
+            $project = new Project();
+            $project->type_id = $faker->randomElement($types);
+            $project->title = $faker->words(3, true);
+            $project->slug = Str::slug($project->title, '-');
+            $project->description = $faker->sentence(20);
+            $project->repository = $faker->word() . '-' . $faker->word();
+            $project->github_link = $faker->url();
+            $rand_date = $faker->dateTimeThisYear();
+            $project->creation_date = $rand_date;
+            $new_date = clone $rand_date;
+            $project->last_commit = $new_date->modify("+2 day");
+            $project->save();
+        }
     }
 }

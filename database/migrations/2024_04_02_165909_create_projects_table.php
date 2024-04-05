@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 20);
+            $table->string('title', 100);
+            $table->string('slug', 50);
             $table->text('description')->nullable();
-            $table->string('repository', 20);
+            $table->string('repository', 50);
             $table->string('github_link');
             $table->date('creation_date')->nullable();
             $table->date('last_commit')->nullable();
