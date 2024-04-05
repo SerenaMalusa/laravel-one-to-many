@@ -17,4 +17,9 @@ class Project extends Model
         'creation_date',
         'last_commit'
     ];
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }
