@@ -36,6 +36,7 @@
                     <p><b>Last commit's date: </b>{{ $project->last_commit }}</p>
                 </div>
 
+                @auth
                 <div class="col-12">
                     <a class="btn btn-primary ms-2" href="{{ route('admin.projects.edit', $project) }}">Modify this project</a>
                     <form class="d-inline" action="{{ route('admin.projects.destroy', $project) }}" method="POST">
@@ -45,6 +46,7 @@
                     </form>
                 </div>
                 <div class="col-12">
+                @endauth
                     
                 </div>
                     
