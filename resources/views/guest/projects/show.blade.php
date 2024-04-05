@@ -11,7 +11,10 @@
                     <a class="btn btn-primary" href="{{ route('projects.index')}}">Back to projects' list</a>
                 </div>
             </div>
-
+            <div class="mb-3">
+                <span class="h5 ms-2"><b>Type:</b></span>
+                {!! $project->type->getBadge() !!}
+            </div>
             <h5><b>Description</b></h5>
             <p>{{ $project->description }}</p>
                         
@@ -66,14 +69,16 @@
 @section('js')
     <script>
         const deleteBtn = document.querySelector('#delete-btn');
-        deleteBtn.addEventListener('click', function (e) {
-
-            if (!confirm(
+        if(deleteBtn) {
+            deleteBtn.addEventListener('click', function (e) {
+    
+                if (!confirm(
 `The delete action is not reversible.
 Are you sure that you want to remove this project from the list?`
-            )) {
-                e.preventDefault();
-            } 
-        });
+                )) {
+                    e.preventDefault();
+                } 
+            });
+        }
     </script>
 @endsection

@@ -18,6 +18,7 @@
         <thead>
           <tr>
             <th scope="col">Title</th>
+            <th scope="col">Type</th>
             <th scope="col">Link</th>
             <th scope="col">Repository</th>
             <th scope="col">Last commit</th>
@@ -28,6 +29,9 @@
             @foreach ($projects as $project)
                 <tr>
                     <td>{{ $project->title }}</th>
+                    <td>
+                      {!! $project->type->getBadge() !!}
+                    </td>
                     <td>
                         <a href={{ $project->github_link }} target="_blank">{{ $project->github_link }}</a>
                     </td>
