@@ -48,9 +48,11 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Type $type)
     {
-        //
+        $related_projects = Project::where('type_id', $type->id)->paginate(4);
+        // dd($related_projects);
+        return view('admin.types.show', compact('type', 'related_projects'));
     }
 
     /**

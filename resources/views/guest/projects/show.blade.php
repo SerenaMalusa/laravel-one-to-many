@@ -14,14 +14,18 @@
             <div class="mb-3">
                 <span class="h5 ms-2"><b>Type:</b></span>
                 @if ($project->type_id)
-                    {!! $project->type->getBadge() !!}
+                    @guest
+                        {!! $project->type->getBadge() !!}
+                    @endguest
+                    @auth
+                        <a href="{{ route('admin.types.show', $project->type) }}">{!! $project->type->getBadge() !!}</a>
+                    @endauth
                 @else 
                     None
-                @endif
+                @endif 
             </div>
             <h5><b>Description</b></h5>
-            <p>{{ $project->description }}</p>
-                        
+            <p>{{ $project->description }}</p>                        
 
             <div class="row">
 
