@@ -51,6 +51,8 @@
       </script>
     @endauth
 
+    @yield('modals')
+
     @yield('js')
   </body>
 
