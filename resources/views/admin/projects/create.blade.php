@@ -78,9 +78,7 @@
                     id="description"
                     name="description"
                     rows="4"
-                >
-                    {{ old('description') }}
-                </textarea>
+                >{{ old('description') }}</textarea>
                 @error('description')
                     <div class="invalid-feedback mb-3">
                         {{ $message }}

@@ -23,13 +23,34 @@
             </div>
 
             <div class="col-6 mb-2">
-                <label for="repository" class="form-label">Repository</label>
-                <input type="text" class="form-control @error('repository') is-invalid @enderror" id="repository" name="repository" value="{{ old('repository') ?? $project->repository }}"/>
-                @error('repository')
-                <div class="invalid-feedback">
-                    {{ $message }}
+
+                <div class="row">
+                    <div class="col-6">
+                        <label for="repository" class="form-label">Repository</label>
+                        <input type="text" class="form-control @error('repository') is-invalid @enderror" id="repository" name="repository" value="{{ old('repository') ?? $project->repository }}"/>
+                        @error('repository')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+
+                    <div class="col-6">
+                        <label for="type_id" class="form-label">Type</label>
+                        <select class="form-select @error('type_id') is-invalid @enderror" id="type_id" name="type_id">
+                            @foreach ($types as $type)
+                            <option @if (old('type_id') ?? $project->type_id == $type->id ) selected @endif value="{{ $type->id }}">{{ $type->name }}</option>
+                            @endforeach
+                            <option @if (old('type_id') ?? $project->type_id == null) selected @endif value="{{ null }}">No type</option>
+                        </select>
+                        @error('type_id')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                 </div>
-                @enderror
+                
             </div>
             
             <div class="col">
@@ -59,9 +80,7 @@
                     id="description"
                     name="description"
                     rows="4"
-                >
-                    {{ old('description') ?? $project->description }}
-                </textarea>
+                >{{ old('description') ?? $project->description }}</textarea>
                 @error('description')
                     <div class="invalid-feedback mb-3">
                         {{ $message }}
