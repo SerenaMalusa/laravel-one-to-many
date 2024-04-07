@@ -8,12 +8,12 @@
             <div class="row justify-content-between align-items-center">
                 <h1 class="mb-3 col-6">{{ $type->name }}</h1>
                 <div class="col-2 d-flex justify-content-end">
-                    <a class="btn btn-primary" href="{{ route('admin.types.index')}}">Back to types' list</a>
+                    <a class="btn btn-primary" href="{{ route('admin.types.index')}}">Types' list</a>
                 </div>
                 
                 <div class="col-6 mb-3">
                     <div class="mb-3">
-                        <span class="h2 ms-2">Type:</span>
+                        <span class="h2 ms-2">Badge:</span>
                         <span>{!! $type->getBadge() !!}</span>                    
                     </div>
                     
@@ -31,6 +31,8 @@
                     </form>
                 </div>
             </div>
+
+            <h2>Related projects:</h2>
             
             @include('layouts.partials.projects_table', ['projects' => $related_projects])
             
