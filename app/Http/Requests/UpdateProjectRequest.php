@@ -25,7 +25,7 @@ class UpdateProjectRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:20',
-            'type_id' => 'nullable',
+            'type_id' => 'nullable|exist:types,id',
             'description' => 'nullable|string',
             'repository' => 'required|max:20',
             'github_link' => 'required',
@@ -46,7 +46,8 @@ class UpdateProjectRequest extends FormRequest
             'required' => 'The :attribute is required.',
             'string' => 'The :attribute must be a string',
             'max' => 'The :attribute must be no longer than :max characters',
-            'date' => 'The :attribute msut be in date format'
+            'date' => 'The :attribute msut be in date format',
+            'type_id.exists' => 'the chosen type must be one of the list above'
         ];
     }
 }

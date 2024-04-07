@@ -18,4 +18,9 @@ class Type extends Model
     {
         return '<span class="badge" style="background-color:' . $this->colour . ';">' . $this->name . '</span>';
     }
+
+    public function getColour()
+    {
+        return '<div style="background-color:' . $this->colour . '; height: 20px; width:100%;"></div>';
+    }
 }
