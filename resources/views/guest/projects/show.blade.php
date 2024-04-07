@@ -13,7 +13,11 @@
             </div>
             <div class="mb-3">
                 <span class="h5 ms-2"><b>Type:</b></span>
-                {!! $project->type->getBadge() !!}
+                @if ($project->type_id)
+                    {!! $project->type->getBadge() !!}
+                @else 
+                    None
+                @endif
             </div>
             <h5><b>Description</b></h5>
             <p>{{ $project->description }}</p>

@@ -10,7 +10,7 @@
       <form action="{{ route('admin.projects.store') }}" method="POST">
         @csrf
     
-        <div class="row flex-wrap mb-2">
+        <div class="row flex-wrap mb-3">
             <div class="col-6 mb-2">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title')}}"/>
@@ -22,16 +22,36 @@
             </div>
 
             <div class="col-6 mb-2">
-                <label for="repository" class="form-label">Repository</label>
-                <input type="text" class="form-control @error('repository') is-invalid @enderror" id="repository" name="repository" value="{{ old('repository')}}"/>
-                @error('repository')
-                <div class="invalid-feedback">
-                    {{ $message }}
+                <div class="row">
+                    <div class="col-6">
+                        <label for="repository" class="form-label">Repository</label>
+                        <input type="text" class="form-control @error('repository') is-invalid @enderror" id="repository" name="repository" value="{{ old('repository')}}"/>
+                        @error('repository')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+
+                    <div class="col-6">
+                        <label for="type_id" class="form-label">Type</label>
+                        <select class="form-select @error('type_id') is-invalid @enderror" id="type_id" name="type_id">
+                            @foreach ($types as $type)
+                            <option @if (old('type_id') == $type->id ) selected @endif value="{{ $type->id }}">{{ $type->name }}</option>
+                            @endforeach
+                            <option @if (old('type_id') == null) selected @endif value="{{ null }}">No type</option>
+                        </select>
+                        @error('type_id')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
                 </div>
-                @enderror
             </div>
             
-            <div class="col">
+            <div class="col mb-3">
                 <label for="creation_date" class="form-label">Created at</label>
                 <input type="date" class="form-control @error('creation_date') is-invalid @enderror" id="creation_date" name="creation_date" value="{{ old('creation_date') ?? Carbon\Carbon::now() }}" />
                 @error('creation_date')
@@ -41,7 +61,7 @@
                 @enderror
             </div>
 
-            <div class="col">
+            <div class="col mb-3">
                 <label for="last_commit" class="form-label">Last commit's date</label>
                 <input type="date" class="form-control @error('last_commit') is-invalid @enderror" id="last_commit" name="last_commit" value="{{ old('last_commit') ?? Carbon\Carbon::now() }}" />
                 @error('last_commit')

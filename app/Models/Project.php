@@ -15,7 +15,8 @@ class Project extends Model
         'repository',
         'github_link',
         'creation_date',
-        'last_commit'
+        'last_commit',
+        'type_id'
     ];
 
     public function type()

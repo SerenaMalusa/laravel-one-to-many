@@ -29,9 +29,13 @@
             @foreach ($projects as $project)
                 <tr>
                     <td>{{ $project->title }}</th>
-                    <td>
-                      {!! $project->type->getBadge() !!}
-                    </td>
+                      <td>
+                          @if ($project->type_id)
+                            {!! $project->type->getBadge() !!}
+                          @else
+                            None
+                          @endif
+                        </td>
                     <td>
                         <a href={{ $project->github_link }} target="_blank">{{ $project->github_link }}</a>
                     </td>
