@@ -14,11 +14,16 @@
             <tr>
                 <td>{{ $project->title }}</th>
                   <td>
-                      @if ($project->type_id)
-                        {!! $project->type->getBadge() !!}
-                      @else
-                        None
-                      @endif
+                    @if ($project->type_id)
+                      @guest
+                          {!! $project->type->getBadge() !!}
+                      @endguest
+                      @auth
+                          <a href="{{ route('admin.types.show', $project->type) }}">{!! $project->type->getBadge() !!}</a>
+                      @endauth
+                    @else 
+                      None
+                    @endif 
                     </td>
                 <td>
                     <a href={{ $project->github_link }} target="_blank">{{ $project->github_link }}</a>
