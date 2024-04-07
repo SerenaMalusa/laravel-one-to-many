@@ -25,7 +25,7 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:20',
-            'type_id' => 'nullable|exist:types,id',
+            'type_id' => ['nullable', 'exists:types,id'],
             'description' => 'nullable|string',
             'repository' => 'required|max:20',
             'github_link' => 'required',
