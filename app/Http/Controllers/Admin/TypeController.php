@@ -39,7 +39,12 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $type = new Type;
+        $type->fill($data);
+        $type->save();
+
+        return redirect()->route('admin.types.show', $type);
     }
 
     /**
@@ -63,19 +68,22 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        return view('admin.types.form', compact(('type')));
+        return view('admin.types.form', compact('type'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Type $type
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Type $type)
     {
-        //
+        $data = $request->all();
+        $type->update($data);
+
+        return redirect()->route('admin.types.show', $type);
     }
 
     /**

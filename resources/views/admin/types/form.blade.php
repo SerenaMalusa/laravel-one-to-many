@@ -15,7 +15,7 @@
         <div class="container py-4">
             <h1 class="mb-5">{{ $title }}</h1>
 
-            <form action="#" method="POST">
+            <form action="@if(!isset($type->id)) {{ route('admin.types.store') }} @else {{ route('admin.types.update', $type) }} @endif" method="POST">
                 @csrf
                 @if(isset($type->id))
                     @method('PATCH')

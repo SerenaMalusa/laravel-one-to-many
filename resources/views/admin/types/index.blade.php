@@ -7,7 +7,7 @@
         <div class="container py-4">
             <div class="row justify-content-between align-items-center">
                 <h1 class="mb-3 col-6">{{ $title }}</h1>
-                    <div class="col-2 text-end">
+                    <div class="col-2 d-flex justify-content-end">
                         <a class="btn btn-primary" href="{{ route('admin.types.create') }}">Create a new Type</a>
                     </div>
             </div>

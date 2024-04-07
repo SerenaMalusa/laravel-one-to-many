@@ -23,7 +23,7 @@
                 </div>
                 
                 <div class="col-6 d-flex justify-content-end">
-                    <a class="btn btn-primary ms-2" href="#">Modify this type</a>
+                    <a class="btn btn-primary ms-2" href="{{ route('admin.types.edit', $type) }}">Modify this type</a>
                     <form class="d-inline" action="#" method="POST">
                         @csrf
                         @method('DELETE')
