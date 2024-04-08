@@ -37,7 +37,7 @@
                                 <i class="fa-solid fa-file-pen"></i>
                             </a>
                             <div class="d-inline-block">
-                                <button class="border border-0 delete-button" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" data-title='{{ $type->name }}'>
+                                <button class="border border-0 delete-button" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal-id{{ $type->id }}" data-title='{{ $type->name }}'>
                                     <i class="fa-solid fa-trash-can text-danger"></i>
                                 </button>                              
                             </div>
@@ -54,9 +54,9 @@
 
 @section('modals')
     @foreach($types as $type)
-        <div class="modal fade mt-5" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal fade mt-5" id="deleteModal-id{{ $type->id }}" tabindex="-1" aria-labelledby="deleteModal-id{{ $type->id }}" aria-hidden="true">
             <div class="modal-dialog">
-                <form class="modal-content">
+                <form class="modal-content" action="{{ route('admin.types.destroy', $type) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <div class="modal-header">
@@ -99,7 +99,3 @@
         }
       </style>
 @endsection
-
-<form class="d-inline-block" action="#" method="POST">
-    
-</form>

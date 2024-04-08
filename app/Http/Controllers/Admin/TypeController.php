@@ -92,8 +92,33 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Type $type)
+    public function destroy(Request $request, Type $type)
     {
+        // get all the request data
+        $data = $request->all();
+        // dd($data['project_action']);
+
+        // get all project related to this type from the db
+        $related_projects = Project::where('type_id', $type->id)->get();
+        // dd($related_projects);
+
+        // for every related project
+        foreach ($related_projects as $project) {
+
+            // if the selected project action is delete
+            if ($data['project_action'] === 'delete') {
+
+                // delete the project
+                $project->delete();
+            } else {
+
+                // assign the project to the id selected with the project action
+                $project->type_id = $data['project_action'];
+                $project->save();
+            }
+        }
+
+        // then delete the type and redirect to the index view
         $type->delete();
         return redirect()->route('admin.types.index');
     }
