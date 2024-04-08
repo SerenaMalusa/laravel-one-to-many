@@ -55,9 +55,10 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
+        $types = Type::all();
         $related_projects = Project::where('type_id', $type->id)->paginate(4);
         // dd($related_projects);
-        return view('admin.types.show', compact('type', 'related_projects'));
+        return view('admin.types.show', compact('type', 'related_projects', 'types'));
     }
 
     /**
